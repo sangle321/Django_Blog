@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+    <style type="text/css">
+        .form-signin {
+      width: 100%;
+      max-width: 330px;
+      padding: 15px;
+      margin: auto;
+    }
+
+    .form-signin .form-floating:focus-within {
+      z-index: 2;
+    }
+
+    .form-signin input[type="email"] {
+      margin-bottom: 10px;
+      border-bottom-right-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+
+    .form-signin input[type="text"] {
+      margin-bottom: 10px;
+      border-bottom-right-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+
+    .form-signin input[type="password"] {
+      margin-bottom: -1px;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
+    .h3 {
+        text-align: center;
+    }
+
+</style>
+
+<form class="form-signin" method="post"> {% csrf_token %}
+
+    <img class="mb-4" src="../assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+    <h1 class="h3 mb-3 fw-normal">Register an account</h1>
+
+    <input type="email" name="email" class="form-control" id="inputEmail" placeholder="name@example.com" required autofocus>
+
+    <input type="text" name="username" class="form-control" id="inputUsername" placeholder="username" required autofocus>
+
+     <input type="password" name="password1" class="form-control" id="inputPassword1" placeholder="Password">
+     <input type="password" name="password2" class="form-control" id="inputPassword2" placeholder="Confirm password">
+
+	{% for field in registration_form %}
+		{% for error in field.errors %}
+			<p style="color: red;">{{error}}</p>
+		{% endfor %}
+	{% endfor %}
+
+	{% if registration_form.non_field_errors %}
+		<div style="color:red;">
+			<p>{{registration_form.non_field_errors}}</p>
+		</div>
+	{% endif %}
+
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Register</button>
+</form>
+{% endblock content %}
